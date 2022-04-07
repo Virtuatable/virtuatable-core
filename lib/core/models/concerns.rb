@@ -4,7 +4,6 @@ module Core
     # @author Vincent Courtois <courtois.vincent@outlook.com>
     module Concerns
       autoload :Activable     , 'core/models/concerns/activable'
-      autoload :Diagnosticable, 'core/models/concerns/diagnosticable'
       autoload :Enumerable    , 'core/models/concerns/enumerable'
       autoload :Historizable  , 'core/models/concerns/historizable'
       autoload :MimeTypable   , 'core/models/concerns/mime_typable'

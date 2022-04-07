@@ -1,4 +1,4 @@
-RSpec.describe Core::Models::Monitoring::Route do
+RSpec.describe Core::Models::Permissions::Route do
   describe :path do
     it 'has a path set at creation' do
       expect(build(:route).path).to eq '/route'
@@ -14,16 +14,6 @@ RSpec.describe Core::Models::Monitoring::Route do
     end
     it 'validates a composite path with parameters' do
       expect(build(:route, path: '/test/:parameter').valid?).to be true
-    end
-  end
-
-  describe :complete_path do
-    let!(:service) { build(:service, path: '/test', key: 'test') }
-    it 'has a complete path taking the service path in consideration' do
-      expect(build(:route, path: '/truc', service: service).complete_path).to eq '/test/truc'
-    end
-    it 'returns the correct complete path for the root path' do
-      expect(build(:route, path: '/', service: service).complete_path).to eq '/test'
     end
   end
 
