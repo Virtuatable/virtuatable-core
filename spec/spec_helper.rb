@@ -17,6 +17,8 @@ require 'database_cleaner'
 require 'core'
 require 'pry'
 
+require_rel 'classes/**/*.rb'
+
 Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each do |filename|
   require filename
 end

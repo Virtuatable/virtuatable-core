@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry', '0.13.1'
   spec.add_development_dependency 'rack', '2.2.3'
   spec.add_development_dependency 'rack-test', '1.1.0'
+  spec.add_development_dependency 'require_all', '3.0.0'
   spec.add_development_dependency 'rspec', '3.9.0'
   spec.add_development_dependency 'rspec-json_expectations', '2.1.0'
   spec.add_development_dependency 'rubocop', '0.90.0'
