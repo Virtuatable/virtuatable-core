@@ -46,9 +46,6 @@ module Core
       # @!attribute [rw] authorizations
       #   @return [Array<Core::Models::OAuth::Authorization>] the authorization issued by this account to third-party applications to access its data.
       has_many :authorizations, class_name: 'Core::Models::OAuth::Authorization', inverse_of: :account
-      # @!attribute [rw] services
-      #   @return [Array<Core::Models::Monitoring::Service>] the services created by this user.
-      has_many :services, class_name: 'Core::Models::Monitoring::Service', inverse_of: :creator
       # @!attribute [rw] sessions
       #   @return [Array<Core::Models::Authentication::Session>] the sessions on which this account is, or has been logged in.
       has_many :sessions, class_name: 'Core::Models::Authentication::Session', inverse_of: :account

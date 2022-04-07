@@ -1,9 +1,8 @@
 FactoryGirl.define do
-  factory :empty_route, class: Core::Models::Monitoring::Route do
+  factory :empty_route, class: Core::Models::Permissions::Route do
     factory :route do
       path '/route'
       verb 'post'
-      association :service, factory: :service, strategy: :build
 
       factory :premium_route do
         premium true

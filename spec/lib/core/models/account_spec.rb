@@ -126,15 +126,6 @@ RSpec.describe Core::Models::Account do
     end
   end
 
-  describe :services do
-    it 'returns the right services for a given account' do
-      expect(create(:account_with_services).services.count).to be 1
-    end
-    it 'returns the right service for an account with a service' do
-      expect(create(:account_with_services).services.first.key).to eq 'test.service'
-    end
-  end
-
   describe :sessions do
     it 'returns the right sessions for a given account' do
       expect(create(:account_with_sessions).sessions.count).to be 1
