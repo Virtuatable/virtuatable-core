@@ -1,12 +1,14 @@
 PATH
   remote: .
   specs:
-    arkaan (3.0.0)
+    virtuatable-core (1.0.0)
       activemodel (= 6.0.3.2)
       activesupport (= 6.0.3.2)
       bcrypt (= 3.1.13)
       dotenv (= 2.7.6)
       mongoid (= 7.1.0)
+      sinatra (>= 2.1.0)
+      sinatra-contrib (= 2.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -28,10 +30,8 @@ GEM
     diff-lcs (1.5.0)
     docile (1.4.0)
     dotenv (2.7.6)
-    factory_bot (6.1.0)
+    factory_bot (6.2.1)
       activesupport (>= 5.0.0)
-    factory_girl (4.8.1)
-      activesupport (>= 3.0.0)
     faker (2.13.0)
       i18n (>= 1.6, < 2)
     i18n (1.10.0)
@@ -43,6 +43,9 @@ GEM
     mongoid (7.1.0)
       activemodel (>= 5.1, < 6.1)
       mongo (>= 2.7.0, < 3.0.0)
+    multi_json (1.15.0)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
     parallel (1.22.1)
     parser (3.1.1.0)
       ast (~> 2.4.1)
@@ -50,10 +53,13 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rainbow (3.1.1)
     regexp_parser (2.2.1)
+    require_all (3.0.0)
     rexml (3.2.5)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
@@ -81,11 +87,24 @@ GEM
     rubocop-ast (0.8.0)
       parser (>= 2.7.1.5)
     ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.5)
     simplecov (0.19.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.3)
+    sinatra (2.1.0)
+      mustermann (~> 1.0)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
+      tilt (~> 2.0)
+    sinatra-contrib (2.1.0)
+      multi_json
+      mustermann (~> 1.0)
+      rack-protection (= 2.1.0)
+      sinatra (= 2.1.0)
+      tilt (~> 2.0)
     thread_safe (0.3.6)
+    tilt (2.0.10)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     unicode-display_width (1.8.0)
@@ -96,18 +115,18 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  arkaan!
   database_cleaner (= 1.6.1)
-  factory_bot (= 6.1.0)
-  factory_girl (= 4.8.1)
+  factory_bot (= 6.2.1)
   faker (= 2.13.0)
   pry (= 0.13.1)
   rack (= 2.2.3)
   rack-test (= 1.1.0)
+  require_all (= 3.0.0)
   rspec (= 3.9.0)
   rspec-json_expectations (= 2.1.0)
   rubocop (= 0.90.0)
   simplecov (= 0.19.0)
+  virtuatable-core!
   yard (= 0.9.25)
 
 BUNDLED WITH

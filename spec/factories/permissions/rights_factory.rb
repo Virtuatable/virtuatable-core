@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :empty_right, class: Core::Models::Permissions::Right do
     factory :right do
-      slug 'test_right'
+      slug { 'test_right' }
       association :category, factory: :category, strategy: :build
 
       factory :right_with_groups do

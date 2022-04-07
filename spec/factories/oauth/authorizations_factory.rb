@@ -1,8 +1,8 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :empty_authorization, class: Core::Models::OAuth::Authorization do
 
     factory :only_code_authorization do
-      code 'test_code'
+      code { 'test_code' }
     end
 
     factory :authorization_random_code do
@@ -11,7 +11,7 @@ FactoryGirl.define do
       association :application, factory: :application, strategy: :build
       
       factory :authorization do
-        code 'test_code'
+        code { 'test_code' }
       end
     end
   end

@@ -10,17 +10,14 @@ require 'bundler/setup'
 Bundler.setup
 
 require "rspec/json_expectations"
-require 'factory_girl'
+require 'factory_bot'
 require 'faker'
 require 'rack/test'
 require 'database_cleaner'
 require 'core'
 require 'pry'
+require 'require_all'
 
-Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each do |filename|
-  require filename
-end
-
-Dir[File.join(File.dirname(__FILE__), 'shared', '**', '*.rb')].each do |filename|
-  require filename
-end
+require_rel 'classes/**/*.rb'
+require_rel 'support/**/*.rb'
+require_rel 'shared/**/*.rb'
