@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Virtuatable
+module Core
   module Helpers
     # Helpers to get and check OAuth applications connecting the the application.
     # @author Vincent Courtois <courtois.vincent@outlook.com>
