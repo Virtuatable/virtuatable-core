@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :empty_access_token, class: Arkaan::OAuth::AccessToken do
+  factory :empty_access_token, class: Core::Models::OAuth::AccessToken do
     factory :random_access_token do
       expiration 3600
       association :authorization, factory: :authorization, strategy: :build

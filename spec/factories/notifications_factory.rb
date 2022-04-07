@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :empty_notitication, class: Arkaan::Notification do
+  factory :empty_notitication, class: Core::Models::Notification do
     factory :notification do
 
     end
