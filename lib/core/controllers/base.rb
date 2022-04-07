@@ -43,15 +43,15 @@ module Core
         api_bad_request key, message: message
       end
 
-      error Virtuatable::API::Errors::NotFound do |exception|
+      error Core::Helpers::Errors::NotFound do |exception|
         api_not_found exception.message
       end
 
-      error Virtuatable::API::Errors::BadRequest do |exception|
+      error Core::Helpers::Errors::BadRequest do |exception|
         api_bad_request exception.message
       end
 
-      error Virtuatable::API::Errors::Forbidden do |exception|
+      error Core::Helpers::Errors::Forbidden do |exception|
         api_forbidden exception.message
       end
 
