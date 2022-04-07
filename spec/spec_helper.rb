@@ -16,13 +16,8 @@ require 'rack/test'
 require 'database_cleaner'
 require 'core'
 require 'pry'
+require 'require_all'
 
 require_rel 'classes/**/*.rb'
-
-Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each do |filename|
-  require filename
-end
-
-Dir[File.join(File.dirname(__FILE__), 'shared', '**', '*.rb')].each do |filename|
-  require filename
-end
+require_rel 'support/**/*.rb'
+require_rel 'shared/**/*.rb'
