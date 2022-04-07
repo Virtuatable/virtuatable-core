@@ -1,4 +1,4 @@
-FactoryBot.define do
+FactoryGirl.define do
   factory :base_error, class: Core::Helpers::Errors::Base do
     initialize_with {
       new(
