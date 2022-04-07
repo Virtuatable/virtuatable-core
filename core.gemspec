@@ -2,7 +2,7 @@ require 'date'
 require './lib/core/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = 'arkaan'
+  spec.name        = 'virtuatable-core'
   spec.version     = Core::VERSION
   spec.date        = Date.today.strftime('%Y-%m-%d')
   spec.summary     = 'The model layer for my table-RPG application'
