@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :empty_account, class: Arkaan::Account do
+  factory :empty_account, class: Core::Models::Account do
     factory :account do
       username  'Babausse'
       password  'password'

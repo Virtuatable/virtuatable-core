@@ -1,16 +1,16 @@
 require 'date'
-require './lib/arkaan/version'
+require './lib/core/version'
 
 Gem::Specification.new do |spec|
   spec.name        = 'arkaan'
-  spec.version     = Arkaan::VERSION
+  spec.version     = Core::VERSION
   spec.date        = Date.today.strftime('%Y-%m-%d')
   spec.summary     = 'The model layer for my table-RPG application'
   spec.description = 'This gem holds the model layer for my table-top RPG games application.'
   spec.authors     = ['Vincent Courtois']
   spec.email       = 'courtois.vincent@outlook.com'
   spec.files       = Dir['lib/**/*.rb']
-  spec.homepage    = 'https://rubygems.org/gems/arkaan'
+  spec.homepage    = 'https://rubygems.org/gems/virtuatable-core'
   spec.license     = 'MIT'
 
   spec.add_development_dependency 'database_cleaner', '1.6.1'

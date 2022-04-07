@@ -14,7 +14,7 @@ require 'factory_girl'
 require 'faker'
 require 'rack/test'
 require 'database_cleaner'
-require 'arkaan'
+require 'core'
 require 'pry'
 
 Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each do |filename|

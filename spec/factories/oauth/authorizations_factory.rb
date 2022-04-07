@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :empty_authorization, class: Arkaan::OAuth::Authorization do
+  factory :empty_authorization, class: Core::Models::OAuth::Authorization do
 
     factory :only_code_authorization do
       code 'test_code'
