@@ -1,19 +1,19 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :empty_account, class: Core::Models::Account do
     factory :account do
-      username  'Babausse'
-      password  'password'
-      firstname 'Vincent'
-      lastname  'Courtois'
-      email     'courtois.vincent@outlook.com'
-      password_confirmation 'password'
+      username { 'Babausse' }
+      password { 'password' }
+      firstname { 'Vincent' }
+      lastname { 'Courtois' }
+      email { 'courtois.vincent@outlook.com' }
+      password_confirmation { 'password' }
 
       factory :conflicting_email_account do
-        username 'Alternate User'
+        username { 'Alternate User' }
       end
 
       factory :conflicting_username_account do
-        email 'alternate@email.com'
+        email { 'alternate@email.com' }
       end
 
       factory :account_with_groups do

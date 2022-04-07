@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :empty_event, class: Core::Models::Event do
     factory :status_event do
-      field 'status'
+      field { 'status' }
     end
   end
 end

@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :empty_group, class: Core::Models::Permissions::Group do
     factory :group do
-      slug 'test_group'
+      slug { 'test_group' }
 
       factory :group_with_members do
         after :create do |group, evaluator|
