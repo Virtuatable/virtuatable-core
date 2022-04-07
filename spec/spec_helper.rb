@@ -10,7 +10,7 @@ require 'bundler/setup'
 Bundler.setup
 
 require "rspec/json_expectations"
-require 'factory_girl'
+require 'factory_bot'
 require 'faker'
 require 'rack/test'
 require 'database_cleaner'
