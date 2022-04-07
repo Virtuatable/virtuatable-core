@@ -39,7 +39,6 @@ module Core
           path: path,
           verb: verb.downcase,
           premium: options[:premium],
-          service: builder.service,
           authenticated: options[:authenticated]
         )
         api_routes.nil? ? @api_routes = [route] : push_route(route)
@@ -66,12 +65,6 @@ module Core
             route.save!
           end
         end
-      end
-
-      # Returns the current builder loading the application.
-      # @return [Virtuatable::Builers::Base] the current builder of the application.
-      def builder
-        Virtuatable::Application.builder
       end
 
       # The default options for a route, being the most used value for each key.
