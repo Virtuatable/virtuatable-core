@@ -7,6 +7,7 @@ module Core
       autoload :Right   , 'core/models/permissions/right'
       autoload :Group   , 'core/models/permissions/group'
       autoload :Category, 'core/models/permissions/category'
+      autoload :Route   , 'core/models/permissions/route'
     end
   end
 end
