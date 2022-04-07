@@ -1,6 +1,6 @@
 test:
   clients:
     default:
-      database: arkaan_test
+      database: virtuatable-tests
       hosts:
         - localhost:27017
