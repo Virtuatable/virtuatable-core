@@ -1,6 +1,6 @@
 module Controllers
   class Responses < Sinatra::Base
-    include Core::API::Responses
+    include Core::Helpers::Responses
 
     get '/created' do
       api_created key: 'value'
