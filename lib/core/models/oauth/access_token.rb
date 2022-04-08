@@ -8,6 +8,8 @@ module Core
         include Mongoid::Document
         include Mongoid::Timestamps
 
+        store_in collection: 'oauth_access_token'
+
         # @!attribute [rw] value
         #   @return [String] the value of the token, returned to the application when built.
         field :value, type: String, default: ->{ SecureRandom.hex }

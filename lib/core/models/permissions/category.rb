@@ -8,6 +8,8 @@ module Core
         include Mongoid::Timestamps
         include Core::Models::Concerns::Sluggable
 
+        store_in collection: 'categories'
+
         has_many :rights, class_name: 'Core::Models::Permissions::Right', inverse_of: :category
 
         make_sluggable 'category'

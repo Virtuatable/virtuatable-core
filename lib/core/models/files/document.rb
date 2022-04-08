@@ -7,6 +7,8 @@ module Core
         include Mongoid::Document
         include Mongoid::Timestamps
 
+        store_in collection: 'documents'
+
         # @!attribute [rw] name
         #   @return [String] the filename the user entered when uploading the file.
         field :name, type: String

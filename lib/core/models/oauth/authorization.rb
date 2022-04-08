@@ -10,6 +10,8 @@ module Core
         include Mongoid::Document
         include Mongoid::Timestamps
 
+        store_in collection: 'oauth_authorization'
+
         # @!attribute [rw] code
         #   @return [String] the value corresponding to the authentication code in the RFC of OAuth2.0, kep for historic purpose.
         field :code, type: String, default: ->{ SecureRandom.hex }

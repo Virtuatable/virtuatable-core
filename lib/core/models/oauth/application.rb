@@ -7,6 +7,8 @@ module Core
         include Mongoid::Document
         include Mongoid::Timestamps
 
+        store_in collection: 'oauth_application'
+
         # @!attribute [rw] name
         #   @return [String] the unique name of the application, mainly used to identify and display it.
         field :name, type: String

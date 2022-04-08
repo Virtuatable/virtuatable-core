@@ -13,6 +13,8 @@ module Core
         include Core::Models::Concerns::Enumerable
         include Core::Models::Concerns::Historizable
 
+        store_in collection: 'invitations'
+
         # @!attribute [rw] account
         #   @return [Core::Models::Account] the account the invitation has been issued to.
         belongs_to :account, class_name: 'Core::Models::Account', inverse_of: :invitations

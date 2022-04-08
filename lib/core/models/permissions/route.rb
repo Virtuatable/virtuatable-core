@@ -9,6 +9,8 @@ module Core
         include Core::Models::Concerns::Premiumable
         include Core::Models::Concerns::Activable
 
+        store_in collection: 'routes'
+
         # @!attribute [rw] path
         #   @return [String] the path (URI) of the route in the API.
         field :path, type: String, default: '/'
