@@ -6,6 +6,8 @@ module Core
       include Mongoid::Document
       include Mongoid::Timestamps
 
+      store_in collection: 'campaigns'
+
       # @!attribute [rw] title
       #   @return [String] the title, or name, of the campaign, used to identify it in the list.
       field :title, type: String

@@ -8,6 +8,8 @@ module Core
         include Mongoid::Timestamps
         include Core::Models::Concerns::Enumerable
 
+        store_in collection: 'chatrooms'
+
         # @!attribute [rw] type
         #  @return [Symbol] the type of message (plain text or command) contained in the data, used to parse and display it.
         enum_field :type, [:text, :command], default: :text

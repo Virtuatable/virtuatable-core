@@ -6,6 +6,8 @@ module Core
       include Mongoid::Document
       include Mongoid::Timestamps
 
+      store_in collection: 'rulesets'
+
       # @!attribute [rw] name
       #   @return [String] the name of the ruleset (eq. "Dungeons and Dragons 4th Edition")
       field :name, type: String

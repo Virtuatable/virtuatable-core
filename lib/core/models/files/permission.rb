@@ -8,6 +8,8 @@ module Core
         include Mongoid::Timestamps
         include Core::Models::Concerns::Enumerable
 
+        store_in collection: 'document_permissions'
+
         # @!attribute [rw] type
         #   @return [Symbol] the type of permission granted (is the user able to delete the file ?)
         enum_field :type, [:read, :read_write]

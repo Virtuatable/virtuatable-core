@@ -8,6 +8,8 @@ module Core
         include Mongoid::Timestamps
         include Core::Models::Concerns::Sluggable
 
+        store_in collection: 'groups'
+
         # @!attribute [rw] is_default
         #   @return [Boolean] a boolean indicating whether this group is given when a new user registered or not.
         field :is_default, type: Boolean, default: false

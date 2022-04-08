@@ -9,6 +9,8 @@ module Core
         include Mongoid::Document
         include Mongoid::Timestamps
 
+        store_in collection: 'sessions'
+
         # @!attribute [rw] token
         #   @return [String] the unique token for this session, used to identify it and be sure the user is connected on this application.
         field :token, type: String

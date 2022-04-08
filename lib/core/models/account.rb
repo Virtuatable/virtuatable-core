@@ -8,6 +8,8 @@ module Core
       include ActiveModel::SecurePassword
       include Core::Models::Concerns::Enumerable
 
+      store_in collection: 'accounts'
+
       # @!attribute [rw] username
       #   @return [String] the nickname the user chose at subscription, must be given, unique, and 6 or more characters long.
       field :username, type: String
@@ -61,8 +63,6 @@ module Core
       # @!attribute [rw] messages
       #   @return [Array<Core::Models::Chatrooms::Messages>] all the messages ever sent by the user.
       has_many :messages, class_name: 'Core::Models::Chatrooms::Message', inverse_of: :account
-
-      has_many :memberships, class_name: 'Core::Models::Chatrooms::Membership', inverse_of: :account
 
       # @!attribute [rw] notifications
       #  @return [Array<Core::Models::Notification>] the notifications linked to this user.

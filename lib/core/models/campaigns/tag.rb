@@ -9,6 +9,8 @@ module Core
         include Mongoid::Document
         include Mongoid::Timestamps
 
+        store_in collection: 'tags'
+
         # @!attribute [rw] content
         #   @return [String] the string content of the tag, describing a characteristic.
         field :content, type: String
