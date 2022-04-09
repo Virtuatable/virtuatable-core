@@ -9,4 +9,5 @@ module Core
   autoload :Controllers, 'core/controllers'
   autoload :Helpers, 'core/helpers'
   autoload :Models, 'core/models'
+  autoload :Services, 'core/services'
 end
