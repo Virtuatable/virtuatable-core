@@ -35,6 +35,10 @@ module Core
       #   @return [Core::Models::Chatrooms::Campaign] the chatroom linked to this campaign.
       embeds_one :chatroom, class_name: 'Core::Models::Chatrooms::Campaign', inverse_of: :campaign
 
+      # @!attribute [rw] tokens
+      #   @return [Array<Core::Models::Campaigns::Token>] the tokens declared in this campaign.
+      embeds_many :tokens, class_name: 'Core::Models::Campaigns::Token', inverse_of: :campaign
+
       # @!attribute [rw] ruleset
       #   @return [Core::Models::Ruleset] the set of rules this campaign is based upon.
       belongs_to :ruleset, class_name: 'Core::Models::Ruleset', inverse_of: :campaigns, optional: true
