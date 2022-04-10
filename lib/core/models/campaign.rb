@@ -16,7 +16,7 @@ module Core
       field :description, type: String
       # @!attribute [rw] is_private
       #   @return [Boolean] TRUE if the campaign can be joined only by being invited by the creator, FALSE if it's publicly displayed and accessible.
-      field :is_private, type: Boolean, default: true
+      field :is_private, type: Mongoid::Boolean, default: true
       # @!attribute [rw] tags
       #   @return [Array<String>] an array of tags describing characteristics of this campaign.
       field :tags, type: Array, default: []

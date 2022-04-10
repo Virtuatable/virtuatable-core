@@ -7,7 +7,7 @@ module Core
     # @author Vincent Courtois <courtois.vincent@outlook.com>
     module Declarators
       # @!attribute [r] routes
-      #   @return [Array<Arkaan::Monitoring::Route>] the currently declared routes.
+      #   @return [Array<Core::Models::Permissions::Route>] the currently declared routes.
       attr_reader :api_routes
 
       # Main method to declare new routes, persisting them in the database and
@@ -33,9 +33,9 @@ module Core
       # Add a route to the database, then to the routes array.
       # @param verb [String] the HTTP method used to request this route.
       # @param path [String] the path used to request this route.
-      # @return [Arkaan::Monitoring::Route] the created route.
+      # @return [Core::Models::Permissions::Route] the created route.
       def add_route(verb:, path:, options:)
-        route = Arkaan::Monitoring::Route.find_or_create_by!(
+        route = Core::Models::Permissions::Route.find_or_create_by!(
           path: path,
           verb: verb.downcase,
           premium: options[:premium],
@@ -47,7 +47,7 @@ module Core
       end
 
       # Pushes the route in the api routes list, by creating it if needed
-      # @param route [Arkaan::Monitoring::Route] the route to push in the list of routes.
+      # @param route [Core::Models::Permissions::Route] the route to push in the list of routes.
       def push_route(route)
         @api_routes << route if api_routes.none? do |tmp_route|
           route.id == tmp_route.id
@@ -56,9 +56,9 @@ module Core
 
       # Add the default access permissions to a route. Any group tagged superuser
       # can automatically access any newly declared_route.
-      # params route [Arkaan::Monitoring::Route] the route to add the permissions to.
+      # params route [Core::Models::Permissions::Route] the route to add the permissions to.
       def add_permissions(route)
-        groups = Arkaan::Permissions::Group.where(is_superuser: true)
+        groups = Core::Models::Permissions::Group.where(is_superuser: true)
         groups.each do |group|
           unless route.groups.where(id: group.id).exists?
             route.groups << group

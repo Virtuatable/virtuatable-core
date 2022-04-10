@@ -8,6 +8,8 @@ FactoryBot.define do
       email { 'courtois.vincent@outlook.com' }
       password_confirmation { 'password' }
 
+      factory :babausse do; end
+
       factory :conflicting_email_account do
         username { 'Alternate User' }
       end

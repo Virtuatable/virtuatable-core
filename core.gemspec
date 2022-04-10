@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'activesupport', '6.0.3.2'
   spec.add_runtime_dependency 'bcrypt', '3.1.13'
   spec.add_runtime_dependency 'dotenv', '2.7.6'
-  spec.add_runtime_dependency 'mongoid', '7.1.0'
-  spec.add_runtime_dependency 'sinatra', '>=2.1.0'
+  spec.add_runtime_dependency 'mongoid', '7.4.0'
+  spec.add_runtime_dependency 'sinatra', '2.1.0'
   spec.add_runtime_dependency 'sinatra-contrib', '2.1.0'
 end
