@@ -13,7 +13,7 @@ module Core
       # @raise [Virtuatable::API::Errors::BadRequest] if the session token is
       #   not correctly given in the parameters.
       #
-      # @return [Arkaan::Authentication::Session] the current session of the user.
+      # @return [Core::Models::Authentication::Session] the current session of the user.
       def session
         return @session unless @session.nil?
 
@@ -23,7 +23,7 @@ module Core
       end 
 
       def session_model
-        Arkaan::Authentication::Session
+        Core::Models::Authentication::Session
       end
     end
   end

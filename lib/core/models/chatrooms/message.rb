@@ -21,7 +21,7 @@ module Core
         field :raw, type: String, default: ''
         # @!attribute [rw] deleted
         #   @return [Boolean] TRUE if the message has been marked as deleted by its user, FALSE otherwise.
-        field :deleted, type: Boolean, default: false
+        field :deleted, type: Mongoid::Boolean, default: false
 
         # @!attribute [rw] campaign
         #   @return [Core::Models::Chatrooms::Campaign] the chatroom in which the message has been emitted.

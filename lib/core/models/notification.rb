@@ -11,7 +11,7 @@ module Core
       field :type, type: String, default: 'NOTIFICATIONS.DEFAULT'
       # @!attribute [rw] read
       #   @return [Boolean] TRUE if the notification has been read (seen by the user), FALSE otherwise.
-      field :read, type: Boolean, default: false
+      field :read, type: Mongoid::Boolean, default: false
       # @!attribute [rw] data
       #   @return [Hash] the custom data that can be attached to this notification, for example for an invitation it can be the invited username.
       field :data, type: Hash, default: {}

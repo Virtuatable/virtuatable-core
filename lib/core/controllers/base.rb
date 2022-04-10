@@ -55,10 +55,8 @@ module Core
         api_forbidden exception.message
       end
 
-      if ENV['RACK_ENV'] != 'test'
-        error StandardError do |error|
-          api_error 500, "unknown_field.#{error.class.name}"
-        end
+      error StandardError do |error|
+        api_error 500, "unknown_field.#{error.class.name}"
       end
     end
   end

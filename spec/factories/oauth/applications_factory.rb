@@ -5,6 +5,7 @@ FactoryBot.define do
       association :creator, factory: :account, strategy: :build
 
       factory :premium_application do
+        name { 'My premium application' }
         key { 'test_key' }
         premium { true }
       end

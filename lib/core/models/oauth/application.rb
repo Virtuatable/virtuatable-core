@@ -17,7 +17,7 @@ module Core
         field :key, type: String, default: ->{ SecureRandom.hex }
         # @!attribute [rw] premium
         #   @return [Boolean] a value indicating whether the application should automatically receive a token when an account is created, or not.
-        field :premium, type: Boolean, default: false
+        field :premium, type: Mongoid::Boolean, default: false
         # @!attirbute [rw] redirect_uris
         #   @return [Array<String>] the redirection URIs used for this application.
         field :redirect_uris, type: Array, default: []

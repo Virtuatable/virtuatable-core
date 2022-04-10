@@ -6,7 +6,7 @@ module Core
     # @author Vincent Courtois <courtois.vincent@outlook.com>
     module Applications
       # Looks for the application sending the API's request, and raises error if not found.
-      # @param [Arkaan::OAuth::Application] the application requesting the service.
+      # @param [Core::Models::OAuth::Application] the application requesting the service.
       def application(premium: false)
         return @application unless @application.nil?
 
@@ -19,7 +19,7 @@ module Core
       end
 
       def application_model
-        Arkaan::OAuth::Application
+        Core::Models::OAuth::Application
       end
     end
   end

@@ -9,7 +9,7 @@ module Core
         included do
           # @!attribute [rw] premium
           #   @return [Boolean] TRUE if the entity is made to be accessible only to premiuma pplications, FALSE otherwise.
-          field :premium, type: Boolean, default: false
+          field :premium, type: Mongoid::Boolean, default: false
         end
       end
     end
