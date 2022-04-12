@@ -48,7 +48,7 @@ module Core
             if !uri.is_a? String
               errors.add(:redirect_uris, 'type')
               break
-            elsif uri.match(/\A(https?:\/\/)((([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*)|(localhost:[0-9]{2,4})\/?)\z/).nil?
+            elsif uri.match(/\Ahttps?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)\z/).nil?
               errors.add(:redirect_uris, 'format')
               break
             end
