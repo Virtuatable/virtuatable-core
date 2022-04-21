@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    virtuatable-core (1.2.0)
+    virtuatable-core (1.2.2)
       activemodel (= 6.0.3.2)
       activesupport (= 6.0.3.2)
       bcrypt (= 3.1.13)

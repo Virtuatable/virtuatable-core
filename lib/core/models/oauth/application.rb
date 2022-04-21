@@ -28,6 +28,9 @@ module Core
         # @!attribute [rw] authorizations
         #   @return [Array<Core::Models::OAuth::Authorization>] the authorizations linked to the accounts this application can get the data from.
         has_many :authorizations, class_name: 'Core::Models::OAuth::Authorization', inverse_of: :application
+        # @!attribute [rw]
+        #   @return [Array<Core::Models::OAuth::Scope>] the scopes this application will transmit to its token
+        has_and_belongs_to_many :scopes, class_name: 'Core::Models::OAuth::Scope', inverse_of: :applications
 
         validates :name,
           presence: {message: 'required'},

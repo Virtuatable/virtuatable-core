@@ -30,6 +30,12 @@ module Core
         def expired?
           created_at.to_time.to_i + expiration < Time.now.to_i
         end
+
+        # Returns the scopes this access token can use to access the application
+        # @return [Array<Core::Models::OAuth::Scope>] the array of scopes from the linked authorization
+        def scopes
+          authorization.scopes
+        end
       end
     end
   end

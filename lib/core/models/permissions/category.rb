@@ -11,8 +11,6 @@ module Core
         store_in collection: 'categories'
 
         has_many :rights, class_name: 'Core::Models::Permissions::Right', inverse_of: :category
-
-        make_sluggable 'category'
       end
     end
   end
