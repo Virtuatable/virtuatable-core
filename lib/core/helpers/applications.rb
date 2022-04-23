@@ -10,10 +10,10 @@ module Core
       def application(premium: false)
         return @application unless @application.nil?
 
-        check_presence 'app_key'
-        @application = application_model.find_by(key: params['app_key'])
-        api_not_found 'app_key.unknown' if @application.nil?
-        api_forbidden 'app_key.forbidden' if premium && !@application.premium
+        check_presence 'client_id'
+        @application = application_model.find_by(client_id: params['client_id'])
+        api_not_found 'client_id.unknown' if @application.nil?
+        api_forbidden 'client_id.forbidden' if premium && !@application.premium
 
         @application
       end

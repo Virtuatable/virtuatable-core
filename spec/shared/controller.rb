@@ -33,7 +33,7 @@ RSpec.shared_examples 'a controller' do |verb|
     it 'Returns the correct body' do
       expect(last_response.body).to include_json(
         status: 400,
-        field: 'app_key',
+        field: 'client_id',
         error: 'required'
       )
     end
@@ -41,7 +41,7 @@ RSpec.shared_examples 'a controller' do |verb|
   describe 'When a non-premium app tries to access a premium route' do
     before do
       send(verb, "/premium", {
-        app_key: application.key,
+        client_id: application.client_id,
         session_id: session.token
       })
     end
@@ -51,7 +51,7 @@ RSpec.shared_examples 'a controller' do |verb|
     it 'Returns the correct body' do
       expect(last_response.body).to include_json(
         status: 403,
-        field: 'app_key',
+        field: 'client_id',
         error: 'forbidden'
       )
     end
@@ -59,7 +59,7 @@ RSpec.shared_examples 'a controller' do |verb|
   describe 'When a non-authenticated request is made on an authenticated route' do
     before do
       send(verb, "/authenticated", {
-        app_key: application.key
+        client_id: application.client_id
       })
     end
     it 'Returns a 400 (Bad Request) status code' do
@@ -77,7 +77,7 @@ RSpec.shared_examples 'a controller' do |verb|
     before do
       send(verb, "/authenticated", {
         session_id: 'unknown session token',
-        app_key: application.key
+        client_id: application.client_id
       })
     end
     it 'Returns a 400 (Bad Request) status code' do

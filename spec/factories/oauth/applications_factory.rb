@@ -3,16 +3,17 @@ FactoryBot.define do
     factory :application do
       name { 'My wonderful test application' }
       association :creator, factory: :account, strategy: :build
+      client_secret { 'super_secret' }
 
       factory :premium_application do
         name { 'My premium application' }
-        key { 'test_key' }
+        client_id { 'test_key' }
         premium { true }
       end
 
       factory :not_premium_application do
         name { 'Another test application' }
-        key { 'other_key' }
+        client_id { 'other_key' }
         premium { false }
       end
 
