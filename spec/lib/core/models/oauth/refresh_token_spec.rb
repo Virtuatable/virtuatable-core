@@ -1,4 +1,7 @@
 RSpec.describe Core::Models::OAuth::RefreshToken do
+  let!(:authorization) { create(:authorization) }
+  let!(:token) { create(:access_token, authorization: authorization) }
+
   describe :value do
     it 'returns the right value for a built token' do
       expect(build(:refresh_token).value).to eq 'test_refresh_token'
@@ -7,7 +10,7 @@ RSpec.describe Core::Models::OAuth::RefreshToken do
       expect(build(:refresh_token, value: nil).valid?).to be false
     end
     it 'invalidates the refresh token if the value is already existing' do
-      create(:refresh_token, authorization: create(:authorization))
+      create(:refresh_token, token: token)
       expect(build(:refresh_token).valid?).to be false
     end
     it 'generates a default random value for the token value' do
@@ -17,10 +20,10 @@ RSpec.describe Core::Models::OAuth::RefreshToken do
 
   describe :authorization do
     it 'returns the right authorization for a built refresh token' do
-      expect(create(:refresh_token, authorization: create(:authorization)).authorization.code).to eq 'test_code'
+      expect(create(:refresh_token, token: token).token.value).to eq token.value
     end
     it 'invalidates the refresh token if the authorization is not given' do
-      expect(build(:refresh_token, authorization: nil).valid?).to be false
+      expect(build(:refresh_token, token: nil).valid?).to be false
     end
   end
 end

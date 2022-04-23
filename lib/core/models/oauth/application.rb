@@ -12,9 +12,12 @@ module Core
         # @!attribute [rw] name
         #   @return [String] the unique name of the application, mainly used to identify and display it.
         field :name, type: String
-        # @!attribute [rw] key
+        # @!attribute [rw] client_id
         #   @return [String] the unique key for the application, identifying it when requesting a token for the API.
-        field :key, type: String, default: ->{ SecureRandom.hex }
+        field :client_id, type: String, default: ->{ SecureRandom.hex }
+        # @!attribute [rw] client_secret
+        #   @return [String] the "password" of the application, used to identify it when requesting tokens.
+        field :client_secret, type: String, default: ->{ SecureRandom.hex }
         # @!attribute [rw] premium
         #   @return [Boolean] a value indicating whether the application should automatically receive a token when an account is created, or not.
         field :premium, type: Mongoid::Boolean, default: false
@@ -28,15 +31,21 @@ module Core
         # @!attribute [rw] authorizations
         #   @return [Array<Core::Models::OAuth::Authorization>] the authorizations linked to the accounts this application can get the data from.
         has_many :authorizations, class_name: 'Core::Models::OAuth::Authorization', inverse_of: :application
+        # @!attribute [rw]
+        #   @return [Array<Core::Models::OAuth::Scope>] the scopes this application will transmit to its token
+        has_and_belongs_to_many :scopes, class_name: 'Core::Models::OAuth::Scope', inverse_of: :applications
 
         validates :name,
           presence: {message: 'required'},
           length: {minimum: 6, message: 'minlength'},
           uniqueness: {message: 'uniq'}
 
-        validates :key,
+        validates :client_id,
           presence: {message: 'required'},
           uniqueness: {message: 'uniq'}
+
+        validates :client_secret,
+          presence: {message: 'required'}
 
         validate :redirect_uris_values
 

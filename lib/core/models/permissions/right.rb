@@ -15,8 +15,6 @@ module Core
         has_and_belongs_to_many :groups, class_name: 'Core::Models::Permissions::Group', inverse_of: :rights
 
         belongs_to :category, class_name: 'Core::Models::Permissions::Category', inverse_of: :rights
-
-        make_sluggable 'right'
       end
     end
   end

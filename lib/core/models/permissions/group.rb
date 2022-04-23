@@ -26,8 +26,6 @@ module Core
         # @!attribute [rw] routes
         #   @return [Array<Core::Models::Monitoring::Route>] the routes this group can access in the API.
         has_and_belongs_to_many :routes, class_name: 'Core::Models::Permissions::Route', inverse_of: :groups
-
-        make_sluggable 'group'
       end
     end
   end

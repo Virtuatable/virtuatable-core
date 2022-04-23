@@ -32,4 +32,22 @@ RSpec.describe Core::Models::OAuth::AccessToken do
       expect(build(:access_token, authorization: nil).valid?).to be false
     end
   end
+
+  describe 'Premium tokens' do
+    let!(:account) { create(:account) }
+    let!(:application) { create(:application, premium: true, creator: account) }
+    let!(:scope) { create(:scope) }
+    let!(:authorization) { create(:authorization, application: application, account: account) }
+    let!(:token) { create(:access_token, authorization: authorization, expiration: 0) }
+
+    it 'is considered premium' do
+      expect(token.premium?).to be true
+    end
+    it 'can never expire' do
+      expect(token.expired?).to be false
+    end
+    it 'has all the scopes' do
+      expect(token.scopes).to eq [scope]
+    end
+  end
 end

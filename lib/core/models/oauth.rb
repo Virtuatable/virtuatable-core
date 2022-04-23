@@ -7,6 +7,7 @@ module Core
       autoload :Authorization, 'core/models/oauth/authorization'
       autoload :AccessToken  , 'core/models/oauth/access_token'
       autoload :RefreshToken , 'core/models/oauth/refresh_token'
+      autoload :Scope        , 'core/models/oauth/scope'
     end
   end
 end

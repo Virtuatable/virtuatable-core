@@ -12,10 +12,17 @@ module Core
         # @!attribute [rw] value
         #   @return [String] the value of the token, returned to the application when built.
         field :value, type: String, default: ->{ SecureRandom.hex }
+        # @!attribute [rw] used_at
+        #   @return [DateTime] the date and time at which this refresh token has been useds to create a new access token.
+        field :used_at, type: DateTime, default: nil
 
         # @!attribute [rw] authorization
         #   @return [Core::Models::OAuth::Authorization] the authorization code that issued this token to the application for this user.
-        belongs_to :authorization, class_name: 'Core::Models::OAuth::Authorization', inverse_of: :refresh_token
+        belongs_to :token, class_name: 'Core::Models::OAuth::AccessToken', inverse_of: :refresh_token
+
+        def used?
+          !used_at.nil? && used_at < DateTime.now
+        end
       end
     end
   end
