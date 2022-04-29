@@ -7,7 +7,7 @@ module Core
         include Mongoid::Document
         include Mongoid::Timestamps
 
-        store_in collection: 'oauth_refresh_token'
+        store_in collection: 'oauth_refresh_tokens'
 
         # @!attribute [rw] value
         #   @return [String] the value of the token, returned to the application when built.

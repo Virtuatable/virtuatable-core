@@ -8,7 +8,7 @@ module Core
         include Mongoid::Document
         include Mongoid::Timestamps
 
-        store_in collection: 'scopes'
+        store_in collection: 'oauth_scopes'
 
         # @!attribute [rw] name
         #   @return [String] the name of the scope, used to get its translation on the frontend.
