@@ -15,6 +15,7 @@ module Core
       include Core::Helpers::Responses
       # Includes the checking methods for sessions.
       include Core::Helpers::Sessions
+      include Core::Helpers::Tokens
       # Include the checkers and getters for OAuth apps
       include Core::Helpers::Applications
       # Include checkers for field requirement and check

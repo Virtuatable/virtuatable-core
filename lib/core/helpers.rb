@@ -14,5 +14,6 @@ module Core
     autoload :Responses, 'core/helpers/responses'
     autoload :Routes, 'core/helpers/routes'
     autoload :Sessions, 'core/helpers/sessions'
+    autoload :Tokens, 'core/helpers/tokens'
   end
 end

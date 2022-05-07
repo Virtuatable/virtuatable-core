@@ -6,6 +6,9 @@ module Controllers
     get '/session' do
       halt 200, {id: session.id.to_s}.to_json
     end
+    get '/token' do
+      halt 200, {id: token.id.to_s}.to_json
+    end
     get '/exception' do
       account
     end
