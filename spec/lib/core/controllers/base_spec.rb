@@ -334,40 +334,6 @@ RSpec.describe Core::Controllers::Base do
       end
     end
   end
-  
-  describe 'routes permissions' do
-    let!(:babausse) { create(:account) }
-    let!(:users) { create(:users) }
-    let!(:administrators) { create(:administrators)}
-    let!(:route) {
-      route = create(:route, verb: 'get', path: '/test', premium: false, authenticated: true)
-      route.groups << users
-      route.save
-      route
-    }
-
-    let!(:controller) {
-      Class.new(Core::Controllers::Base) do
-        api_route 'get', '/test' do
-
-        end
-      end
-    }
-    let!(:groups) { controller.api_routes.first.groups.sort_by(&:slug) }
-    def app
-      controller.new
-    end
-
-    it 'does not reset the permissions of a route when re-declared' do
-      expect(controller.api_routes.first.groups.count).to be 2
-    end
-    it 'Contains the administrator group as it is default' do
-      expect(groups.first.id).to eq administrators.id
-    end
-    it 'Still contains the users group' do
-      expect(groups.last.id).to eq users.id
-    end
-  end
 
   describe 'API routes' do
     it_should_behave_like 'a controller', 'get'

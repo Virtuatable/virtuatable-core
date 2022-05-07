@@ -17,9 +17,6 @@ module Core
         # @!attribute [rw] verb
         #   @return [String] the verb (HTTP method) of this route in the API.
         field :verb, type: String, default: 'get'
-        # @!attribute [rw] authenticated
-        #   @return [Boolean] if true, the session_id is needed for this route, if false it is not.
-        field :authenticated, type: Mongoid::Boolean, default: true
         # @!attribute [rw] groups
         #   @return [Array<Core::Models::Permissions::Group>] the groups having permission to access this route.
         has_and_belongs_to_many :groups, class_name: 'Core::Models::Permissions::Group', inverse_of: :groups

@@ -17,15 +17,12 @@ module Core
       # @param path [String] the whole URI with parameters for the route.
       # @param options [Hash] the additional options for the route.
       def api_route(verb, path, options: {}, &block)
-        options = default_options.merge(options)
-        route = add_route(verb: verb, path: path, options: options)
 
         # TODO : do everything in the #send itself to avoid
         # route reload issues when premium is changed. It will
         # add some treatments but avoid many problems if route.premium
-        send(route.verb, route.path) do
-          application(premium: current_route.premium)
-          session if current_route.authenticated
+        send(verb, path) do
+          application(premium: options[:premium]) && token
           instance_eval(&block)
         end
       end
@@ -38,8 +35,7 @@ module Core
         route = Core::Models::Permissions::Route.find_or_create_by!(
           path: path,
           verb: verb.downcase,
-          premium: options[:premium],
-          authenticated: options[:authenticated]
+          premium: options[:premium]
         )
         api_routes.nil? ? @api_routes = [route] : push_route(route)
         add_permissions(route)
