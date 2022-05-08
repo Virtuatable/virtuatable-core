@@ -151,36 +151,95 @@ RSpec.describe Core::Controllers::Base do
     end
   end
 
-  describe 'accounts and sessions helpers' do
+  describe 'accounts helpers' do
     def app
       Controllers::Accounts.new
     end
+
     describe 'Nominal case' do
-      let!(:babausse) { create(:account) }
-      let!(:session) { create(:session, account: babausse) }
+      let!(:account) { create(:account) }
+      let!(:application) { create(:application, creator: account) }
+      let!(:authorization) { create(:authorization, account: account, application: application) }
+      let!(:token) { create(:access_token, authorization: authorization) }
 
       it 'should correctly return the account when asked' do
-        get '/account', {session_id: session.token}
-        expect(last_response.body).to include_json(id: babausse.id.to_s)
-      end
-      it 'should return the session' do
-        get '/session', {session_id: session.token}
-        expect(last_response. body).to include_json({id: session.id.to_s})
+        get '/account', {token: token.value, client_id: application.client_id}
+        expect(last_response.body).to include_json(id: account.id.to_s)
       end
     end
-    describe 'When the account is required bu not given' do
-      before do
-        get '/exception'
+  end
+
+  describe 'tokens helper' do
+    def app
+      Controllers::Tokens.new
+    end
+
+    let!(:account) { create(:account) }
+    let!(:application) { create(:application, creator: account) }
+    let!(:authorization) { create(:authorization, application: application) }
+    let!(:token) { create(:access_token, authorization: authorization) }
+
+    describe 'Nominal case' do
+      it 'returns the correct body' do
+        get '/tokens', {token: token.value, client_id: application.client_id}
+        expect(last_response.body).to include_json(id: token.id.to_s)
       end
-      it 'Returns a 404 (Not Found) status code' do
+    end
+    describe 'When the client UUID of the application is not given' do
+      before do
+        get '/tokens', {token: token.value}
+      end
+      it 'Returns a 400 (Bad Request) status code' do
         expect(last_response.status).to be 400
       end
       it 'Returns the correct body' do
-        expect(last_response.body).to include_json(
-          status: 400,
-          field: 'session_id',
-          error: 'required'
-        )
+        expect(last_response.body).to include_json(field: 'client_id', error: 'required')
+      end
+    end
+    describe 'When the client UUID of the application does not exist' do
+      before do
+        get '/tokens', {token: token.value, client_id: 'unknown'}
+      end
+      it 'Returns a 404 (Not Found) status code' do
+        expect(last_response.status).to be 404
+      end
+      it 'Returns the correct body' do
+        expect(last_response.body).to include_json(field: 'client_id', error: 'unknown')
+      end
+    end
+    describe 'When the token is not given' do
+      before do
+        get '/tokens', {client_id: application.client_id}
+      end
+      it 'Returns a 400 (Bad Request) status code' do
+        expect(last_response.status).to be 400
+      end
+      it 'Returns the correct body' do
+        expect(last_response.body).to include_json(field: 'token', error: 'required')
+      end
+    end
+    describe 'When the token does not exist' do
+      before do
+        get '/tokens', {token: 'unknown', client_id: application.client_id}
+      end
+      it 'Returns a 404 (Not Found) status code' do
+        expect(last_response.status).to be 404
+      end
+      it 'Returns the correct body' do
+        expect(last_response.body).to include_json(field: 'token', error: 'unknown')
+      end
+    end
+    describe 'When token does not belong to the provided application' do
+      let!(:second_app) { create(:application, name: 'Second application') }
+
+      before do
+        get '/tokens', {token: token.value, client_id: second_app.client_id}
+      end
+      it 'Returns a 403 (Forbidden) status code' do
+        expect(last_response.status).to be 403
+      end
+      it 'Returns the correct body' do
+        expect(last_response.body).to include_json(field: 'token', error: 'mismatch')
       end
     end
   end
@@ -260,40 +319,6 @@ RSpec.describe Core::Controllers::Base do
           key: 'value'
         )
       end
-    end
-  end
-  
-  describe 'routes permissions' do
-    let!(:babausse) { create(:account) }
-    let!(:users) { create(:users) }
-    let!(:administrators) { create(:administrators)}
-    let!(:route) {
-      route = create(:route, verb: 'get', path: '/test', premium: false, authenticated: true)
-      route.groups << users
-      route.save
-      route
-    }
-
-    let!(:controller) {
-      Class.new(Core::Controllers::Base) do
-        api_route 'get', '/test' do
-
-        end
-      end
-    }
-    let!(:groups) { controller.api_routes.first.groups.sort_by(&:slug) }
-    def app
-      controller.new
-    end
-
-    it 'does not reset the permissions of a route when re-declared' do
-      expect(controller.api_routes.first.groups.count).to be 2
-    end
-    it 'Contains the administrator group as it is default' do
-      expect(groups.first.id).to eq administrators.id
-    end
-    it 'Still contains the users group' do
-      expect(groups.last.id).to eq users.id
     end
   end
 

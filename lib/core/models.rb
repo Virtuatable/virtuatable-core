@@ -16,7 +16,6 @@ module Core
     autoload :Files, 'core/models/files'
     autoload :Notification, 'core/models/notification'
     autoload :OAuth, 'core/models/oauth'
-    autoload :Permissions, 'core/models/permissions'
     autoload :Ruleset, 'core/models/ruleset'
   end
 end

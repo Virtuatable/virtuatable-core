@@ -10,8 +10,8 @@ module Core
       def account
         return @account unless @account.nil?
 
-        session_id_required if !respond_to?(:session) || session.nil?
-        @account = session.account
+        @account = token.authorization.account
+        @account
       end
 
       def account_id_not_found
