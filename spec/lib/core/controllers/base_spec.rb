@@ -157,27 +157,14 @@ RSpec.describe Core::Controllers::Base do
     end
 
     describe 'Nominal case' do
-      let!(:babausse) { create(:account) }
-      let!(:session) { create(:session, account: babausse) }
+      let!(:account) { create(:account) }
+      let!(:application) { create(:application, creator: account) }
+      let!(:authorization) { create(:authorization, account: account, application: application) }
+      let!(:token) { create(:access_token, authorization: authorization) }
 
       it 'should correctly return the account when asked' do
-        get '/account', {session_id: session.token}
-        expect(last_response.body).to include_json(id: babausse.id.to_s)
-      end
-    end
-    describe 'When the account is required bu not given' do
-      before do
-        get '/exception'
-      end
-      it 'Returns a 404 (Not Found) status code' do
-        expect(last_response.status).to be 400
-      end
-      it 'Returns the correct body' do
-        expect(last_response.body).to include_json(
-          status: 400,
-          field: 'session_id',
-          error: 'required'
-        )
+        get '/account', {token: token.value, client_id: application.client_id}
+        expect(last_response.body).to include_json(id: account.id.to_s)
       end
     end
   end

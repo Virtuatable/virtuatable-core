@@ -13,9 +13,9 @@ module Core
       # Includes the custom errors throwers and responses helpers.
       include Core::Helpers::Errors
       include Core::Helpers::Responses
-      # Includes the checking methods for sessions.
-      include Core::Helpers::Sessions
+      # Includes the checking methods for access tokens.
       include Core::Helpers::Tokens
+      include Core::Helpers::Scopes
       # Include the checkers and getters for OAuth apps
       include Core::Helpers::Applications
       # Include checkers for field requirement and check

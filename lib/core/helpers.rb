@@ -13,7 +13,7 @@ module Core
     autoload :Parameters, 'core/helpers/parameters'
     autoload :Responses, 'core/helpers/responses'
     autoload :Routes, 'core/helpers/routes'
-    autoload :Sessions, 'core/helpers/sessions'
+    autoload :Scopes, 'core/helpers/scopes'
     autoload :Tokens, 'core/helpers/tokens'
   end
 end

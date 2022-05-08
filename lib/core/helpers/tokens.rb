@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Core
   module Helpers
     # This helper aims at providing vanity methods concerning OAuth tokens.

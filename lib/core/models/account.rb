@@ -37,10 +37,6 @@ module Core
       # @!attribute [w] password_confirmation
       #   @return [String] the confirmation of the password, do not get, just set it ; it must be the same as the password.
       has_secure_password validations: false
-
-      # @!attribute [rw] groups
-      #   @return [Array<Core::Models::Permissions::Group>] the groups giving their corresponding rights to the current account.
-      has_and_belongs_to_many :groups, class_name: 'Core::Models::Permissions::Group', inverse_of: :accounts
       
       # @!attribute [rw] applications
       #   @return [Array<Core::Models::OAuth::Application] the applications this user has created and owns.

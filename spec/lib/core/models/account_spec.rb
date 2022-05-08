@@ -99,15 +99,6 @@ RSpec.describe Core::Models::Account do
     end
   end
 
-  describe :groups do
-    it 'returns the right number of groups for a given account' do
-      expect(create(:account_with_groups).groups.count).to be 1
-    end
-    it 'returns the right group for an account with a group' do
-      expect(create(:account_with_groups).groups.first.slug).to eq 'test_group'
-    end
-  end
-
   describe :applications do
     it 'returns the right number of applications for a given account' do
       expect(create(:account_with_applications).applications.count).to be 1
