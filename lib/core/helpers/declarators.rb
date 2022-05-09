@@ -13,9 +13,9 @@ module Core
       # @param verb [String] the HTTP method for the route.
       # @param path [String] the whole URI with parameters for the route.
       # @param options [Hash] the additional options for the route.
-      def api_route(verb, path, premium: false, scopes: ['data::usage'], &block)
+      def api_route(verb, path, premium: false, scopes: [], &block)
         send(verb, path) do
-          scope_objects = fetch_scopes(scopes)
+          scope_objects = fetch_scopes(scopes + ['data::usage'])
           appli = application(premium: premium)
           check_app_scopes(appli, scope_objects)
           check_token_scopes(token, scope_objects)

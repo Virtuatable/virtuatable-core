@@ -1,6 +1,5 @@
 RSpec.describe Core::Services::Sessions do
-  let!(:registry) { Core::Services::Registry.new }
-  let!(:service) { Core::Services::Sessions.new(registry) }
+  let!(:service) { Core::Services::Sessions.instance }
 
   describe :create do
     it 'Fails if the user is not found' do
