@@ -17,7 +17,7 @@ module Core
       # @param password [string] the password the user has provided
       # @return [Core::Models::Authentication::Session] the login session
       def create(username, password)
-        account = services.accounts.get_by_username(username)
+        account = Core.svc.accounts.get_by_username(username)
         if BCrypt::Password.new(account.password_digest) != password
           raise Core::Helpers::Errors::Forbidden.new(
             field: 'password',
