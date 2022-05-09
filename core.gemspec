@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'mongoid', '7.4.0'
   spec.add_runtime_dependency 'sinatra', '2.1.0'
   spec.add_runtime_dependency 'sinatra-contrib', '2.1.0'
+  spec.add_runtime_dependency 'draper'
 end

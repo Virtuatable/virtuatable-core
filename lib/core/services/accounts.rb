@@ -2,7 +2,7 @@ module Core
   module Services
     class Accounts
       include Singleton
-
+      
       def get_by_username(username)
         account = Core::Models::Account.find_by(username: username)
         if account.nil?

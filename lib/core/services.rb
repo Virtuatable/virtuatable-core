@@ -7,5 +7,6 @@ module Core
     autoload :Accounts, 'core/services/accounts'
     autoload :Registry, 'core/services/registry'
     autoload :Sessions, 'core/services/sessions'
+    autoload :Campaigns, 'core/services/campaigns'
   end
 end
