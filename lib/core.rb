@@ -9,4 +9,9 @@ module Core
   autoload :Helpers, 'core/helpers'
   autoload :Models, 'core/models'
   autoload :Services, 'core/services'
+
+  # Returns the registry of services for easier access to each of them.
+  def self.svc
+    Core::Services::Registry.instance
+  end
 end

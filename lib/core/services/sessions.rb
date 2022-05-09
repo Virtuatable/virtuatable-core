@@ -5,7 +5,8 @@ module Core
   module Services
     # Service concerning sessions (log in and log out)
     # @author Vincent Courtois <courtois.vincent@outlook.com>
-    class Sessions < Core::Services::Base
+    class Sessions
+      include Singleton
       # Creates a new session from the given user credentials. IT will
       # * check that the user exists in the database
       # * check that the password matches the user encrypted password
