@@ -5,12 +5,13 @@ module Core
     class Registry
       include Singleton
 
-      attr_reader :accounts, :sessions, :campaigns
+      attr_reader :accounts, :sessions, :campaigns, :applications
 
       def initialize
         @accounts = Core::Services::Accounts.instance
         @sessions = Core::Services::Sessions.instance
         @campaigns = Core::Services::Campaigns.instance
+        @applications = Core::Services::Applications.instance
       end
     end
   end
