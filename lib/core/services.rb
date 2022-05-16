@@ -6,6 +6,7 @@ module Core
   module Services
     autoload :Accounts, 'core/services/accounts'
     autoload :Applications, 'core/services/applications'
+    autoload :Authorizations, 'core/services/authorizations'
     autoload :Base, 'core/services/base'
     autoload :Registry, 'core/services/registry'
     autoload :Sessions, 'core/services/sessions'

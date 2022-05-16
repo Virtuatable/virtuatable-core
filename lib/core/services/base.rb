@@ -5,11 +5,11 @@ module Core
       # @raise [Core::Helpers::Errors::BadRequest] an error if any parameter is nil.
       def require_parameters(*parameters)
         parameters.each do |parameter|
-          raise required_err(field: parameter) if parameter.nil?
+          raise bad_request_err(field: parameter, error: 'required') if parameter.nil?
         end
       end
 
-      def required_err(field: nil, error: 'required')
+      def bad_request_err(field: nil, error: nil)
         Core::Helpers::Errors::BadRequest.new(field: field, error: error)
       end
 
