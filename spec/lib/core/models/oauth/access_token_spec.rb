@@ -19,9 +19,6 @@ RSpec.describe Core::Models::OAuth::AccessToken do
     it 'returns the right authorization for a built access token' do
       expect(create(:access_token, authorization: create(:authorization)).authorization.code).to eq 'test_code'
     end
-    it 'invalidates the access token if the authorization is not given' do
-      expect(build(:access_token, authorization: nil).valid?).to be false
-    end
   end
 
   describe 'Premium tokens' do

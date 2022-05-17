@@ -144,6 +144,15 @@ RSpec.describe Core::Services::Tokens do
         }
         expect(->{ service.create_from_token(**params) }).to raise_error Core::Helpers::Errors::BadRequest
       end
+      it 'fails if the token has already been refreshed' do
+        params = {
+          client_id: application.client_id,
+          client_secret: application.client_secret,
+          token: generator.value
+        }
+        service.create_from_token(**params)
+        expect(->{ service.create_from_token(**params) }).to raise_error Core::Helpers::Errors::Forbidden
+      end
     end
   end
   describe :get_by_value do

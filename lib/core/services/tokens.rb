@@ -26,9 +26,9 @@ module Core
         token_client_id = token.authorization.application.client_id
         raise bad_request_err(field: 'client_id', error: 'mismatch') if token_client_id != application.client_id
 
-        token.generated = Core::Models::OAuth::AccessToken.create(generator: token)
-        token.save!
-        token.generated
+        raise forbidden_err(field: 'token', error: 'used') unless token.generated.nil?
+
+        Core::Models::OAuth::AccessToken.create(generator: token)
       end
 
       def get_by_value(token: nil, **_ignored)
