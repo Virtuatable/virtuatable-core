@@ -2,6 +2,9 @@
 
 module Core
   module Services
+    # Service managing authorization codes. These codes represent the access a user
+    # is giving to an application on all or part of its data.
+    # @author Vincent Courtois <courtois.vincent@outlook.com>
     class Authorizations < Core::Services::Base
       include Singleton
 

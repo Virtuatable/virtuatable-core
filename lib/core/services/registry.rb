@@ -7,7 +7,21 @@ module Core
     class Registry
       include Singleton
 
-      attr_reader :accounts, :sessions, :campaigns, :applications, :authorizations
+      # @!attribute [r] accounts
+      #   @return [Core::Services::Accounts] the service managing accounts
+      attr_reader :accounts
+      # @!attribute [r] sessions
+      #   @return [Core::Services::Sessions] the service managing sessions
+      attr_reader :sessions
+      # @!attribute [r] campaigns
+      #   @return [Core::Services::Campaigns] the service managing campaigns
+      attr_reader :campaigns
+      # @!attribute [r] applications
+      #   @return [Core::Services::Applications] the service managing applications
+      attr_reader :applications
+      # @!attribute [r] authorizations
+      #   @return [Core::Services::Authorizations] the service managing authorizations
+      attr_reader :authorizations
 
       def initialize
         @accounts = Core::Services::Accounts.instance

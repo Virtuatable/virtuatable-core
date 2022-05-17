@@ -2,6 +2,9 @@
 
 module Core
   module Services
+    # Service managing applications, allowing easy access to them with or without
+    # providing client secret for example.
+    # @author Vincent Courtois <courtois.vincent@outlook.com>
     class Applications < Core::Services::Base
       include Singleton
 
