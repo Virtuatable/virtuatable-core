@@ -13,10 +13,11 @@ module Core
       end
 
       # The parameters from the JSON body if it is sent.
-      # @return [Hash] the JSON body parsed as a dictionary.
+      # @return [Hash] the JSON body parsed as a dict ionary.
       def body_params
         request.body.rewind
-        JSON.parse(request.body.read.to_s)
+        body = JSON.parse(request.body.read.to_s)
+        body.map { |k, v| [k.to_sym, v] }.to_h
       rescue JSON::ParserError
         {}
       end
