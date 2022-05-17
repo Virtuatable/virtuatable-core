@@ -16,7 +16,7 @@ module Core
 
         # @!attribute [rw] authorization
         #   @return [Core::Models::OAuth::Authorization] the authorization code that issued this token to the application for this user.
-        belongs_to :authorization, class_name: 'Core::Models::OAuth::Authorization', inverse_of: :tokens
+        belongs_to :authorization, class_name: 'Core::Models::OAuth::Authorization', inverse_of: :tokens, optional: true
         # @!attribute [rw] generator
         #   @return [Core::Models::Oauth::AccessToken] the token that generated this one.
         belongs_to :generator, class_name: 'Core::Models::OAuth::AccessToken', inverse_of: :generated, optional: true

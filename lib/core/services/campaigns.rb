@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Core
   module Services
     class Campaigns
@@ -10,7 +12,7 @@ module Core
       # @param per_page [Integer] the number of campaigns per page.
       #
       # @return [Array<Hash>] an array of hash representing campaigns.
-      def list(account, page: 0, per_page: 20, **ignored)
+      def list(account, page: 0, per_page: 20, **_ignored)
         campaigns = campaigns(account).skip(page * per_page).limit(per_page)
         campaigns.map do |campaign|
           Core::Decorators::Campaign.new(campaign).to_simple_h

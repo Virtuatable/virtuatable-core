@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bcrypt'
 require 'securerandom'
 
@@ -19,12 +21,10 @@ module Core
       def create(username, password)
         account = Core.svc.accounts.get_by_username(username)
         if BCrypt::Password.new(account.password_digest) != password
-          raise Core::Helpers::Errors::Forbidden.new(
-            field: 'password',
-            error: 'wrong'
-          )
+          raise Core::Helpers::Errors::Forbidden.new(field: 'password', error: 'wrong')
         end
-        return Core::Models::Authentication::Session.create(
+
+        Core::Models::Authentication::Session.create(
           account: account,
           token: SecureRandom.uuid
         )

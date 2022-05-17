@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Core
   module Services
     class Applications < Core::Services::Base
@@ -12,10 +14,11 @@ module Core
       # @raise [Core::Helpers::Errors::BadRequest] if a parameter is not correctly given.
       # @raise [Core::Helpers::Errors::Forbidden] if the client secret is wrong for this application.
       # @raise [Core::Helpers::Errors::Unknown] if the application is not found.
-      def get_by_credentials(client_id: nil, client_secret: nil, **ignored)
+      def get_by_credentials(client_id: nil, client_secret: nil, **_ignored)
         require_parameters client_id, client_secret
         application = get_by_id(client_id: client_id)
         raise forbidden_err(field: 'client_secret', error: 'wrong') if application.client_secret != client_secret
+
         application
       end
 
@@ -25,10 +28,11 @@ module Core
       # @return [Core::Models::OAuth::Application] the application found if no error is raised.
       #
       # @raise [Core::Helpers::Errors::Unknown] if the application is not found.
-      def get_by_id(client_id: nil, **ignored)
+      def get_by_id(client_id: nil, **_ignored)
         require_parameters client_id
         application = Core::Models::OAuth::Application.find_by(client_id: client_id)
         raise unknown_err(field: 'client_id') if application.nil?
+
         application
       end
     end
