@@ -5,9 +5,10 @@ module Core
     class Base
       # Raises an error if any parameter is nil, and nothing if all parameters are found.
       # @raise [Core::Helpers::Errors::BadRequest] an error if any parameter is nil.
-      def require_parameters(*parameters)
-        parameters.each do |parameter|
-          raise bad_request_err(field: parameter, error: 'required') if parameter.nil?
+      def require_parameters(**parameters)
+        parameters.keys.each do |key|
+          value = parameters[key]
+          raise bad_request_err(field: key.to_s, error: 'required') if value.nil?
         end
       end
 

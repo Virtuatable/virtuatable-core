@@ -18,7 +18,7 @@ module Core
       # @raise [Core::Helpers::Errors::Forbidden] if the client secret is wrong for this application.
       # @raise [Core::Helpers::Errors::Unknown] if the application is not found.
       def get_by_credentials(client_id: nil, client_secret: nil, **_ignored)
-        require_parameters client_id, client_secret
+        require_parameters client_secret: client_secret
         application = get_by_id(client_id: client_id)
         raise forbidden_err(field: 'client_secret', error: 'wrong') if application.client_secret != client_secret
 
@@ -32,7 +32,7 @@ module Core
       #
       # @raise [Core::Helpers::Errors::Unknown] if the application is not found.
       def get_by_id(client_id: nil, **_ignored)
-        require_parameters client_id
+        require_parameters client_id: client_id
         application = Core::Models::OAuth::Application.find_by(client_id: client_id)
         raise unknown_err(field: 'client_id') if application.nil?
 

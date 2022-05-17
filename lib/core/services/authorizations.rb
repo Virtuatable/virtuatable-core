@@ -22,6 +22,7 @@ module Core
       # @raise [Core::Helpers::Errors::Forbidden] if the secret does not match the application,
       #   or the authorization code does not belong to the application.
       def get_by_credentials(client_id: nil, client_secret: nil, authorization_code: nil, **_ignored)
+        require_parameters authorization_code: authorization_code
         application = Core.svc.applications.get_by_credentials(
           client_id: client_id,
           client_secret: client_secret
@@ -37,7 +38,7 @@ module Core
       # @return [Core::Models::OAuth::Authorization] the authorization object.
       # @raise [Core::Helpers::Errors::NotFound] if the authorization code is not found.
       def get_by_code(authorization_code: nil, **_ignored)
-        require_parameters authorization_code
+        require_parameters authorization_code: authorization_code
         authorization = Core::Models::OAuth::Authorization.find_by(code: authorization_code)
         raise unknown_err(field: 'authorization_code') if authorization.nil?
 

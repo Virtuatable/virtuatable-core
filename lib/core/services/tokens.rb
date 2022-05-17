@@ -32,7 +32,7 @@ module Core
       end
 
       def get_by_value(token: nil, **_ignored)
-        require_parameters token
+        require_parameters token: token
         token = Core::Models::OAuth::AccessToken.find_by(value: token)
         raise unknown_err(field: 'token') if token.nil?
 
