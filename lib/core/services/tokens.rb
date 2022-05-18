@@ -14,21 +14,29 @@ module Core
           client_secret: client_secret,
           authorization_code: authorization_code
         )
-        Core::Models::OAuth::AccessToken.create(authorization: authorization)
+        raise forbidden_err(field: 'authorization_code', error: 'used') if authorization.used
+
+        created = Core::Models::OAuth::AccessToken.create(authorization: authorization)
+        Core::Decorators::Token.new(created)
       end
 
       # Refreshes the token for the next request the client wants to issue by re-creating it
       # from the previous token to add it to the tokens chain.
       #
       def create_from_token(client_id: nil, client_secret: nil, token: nil, **_ignored)
-        application = Core.svc.applications.get_by_credentials(client_id: client_id, client_secret: client_secret)
         token = get_by_value(token: token)
-        token_client_id = token.authorization.application.client_id
-        raise bad_request_err(field: 'client_id', error: 'mismatch') if token_client_id != application.client_id
-
+        authorization = Core.svc.authorizations.get_by_credentials(
+          client_id: client_id,
+          client_secret: client_secret,
+          authorization_code: token.authorization.code
+        )
         raise forbidden_err(field: 'token', error: 'used') unless token.generated.nil?
 
-        Core::Models::OAuth::AccessToken.create(generator: token)
+        created = Core::Models::OAuth::AccessToken.create(
+          generator: token,
+          authorization: authorization
+        )
+        Core::Decorators::Token.new(created)
       end
 
       def get_by_value(token: nil, **_ignored)
@@ -36,7 +44,7 @@ module Core
         token = Core::Models::OAuth::AccessToken.find_by(value: token)
         raise unknown_err(field: 'token') if token.nil?
 
-        token
+        Core::Decorators::Token.new(token)
       end
     end
   end

@@ -78,6 +78,15 @@ RSpec.describe Core::Services::Tokens do
         }
         expect(->{ service.create_from_authorization(**params) }).to raise_error Core::Helpers::Errors::Forbidden
       end
+      it 'fails if the authorization code has already been used' do
+        second_auth = create(:authorization, application: application, code: 'any code', used: true)
+        params = {
+          client_id: application.client_id,
+          client_secret: application.client_secret,
+          authorization_code: second_auth.code
+        }
+        expect(->{ service.create_from_authorization(**params) }).to raise_error Core::Helpers::Errors::Forbidden
+      end
     end
   end
   describe :create_from_token do
@@ -102,7 +111,7 @@ RSpec.describe Core::Services::Tokens do
         expect(generator.reload.generated.id.to_s).to eq token.id.to_s
       end
       it 'has no authorization code set' do
-        expect(token.authorization).to be nil
+        expect(token.authorization.id.to_s).to eq authorization.id.to_s
       end
     end
     describe 'error cases' do
@@ -133,7 +142,7 @@ RSpec.describe Core::Services::Tokens do
           client_secret: 'unknown',
           authorization_code: generator.value
         }
-        expect(->{ service.create_from_token(**params) }).to raise_error Core::Helpers::Errors::Forbidden
+        expect(->{ service.create_from_token(**params) }).to raise_error Core::Helpers::Errors::BadRequest
       end
       it 'fails if the token does not belong to the application' do
         second_app = create(:application, creator: account, name: 'Second app')

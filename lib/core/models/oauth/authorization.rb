@@ -17,7 +17,10 @@ module Core
         field :code, type: String, default: ->{ SecureRandom.hex }
         # @!attribute [rw] expiration
         #   @return [Integer] the time, in seconds, after which the authorization is declared expired.
-        field :expiration, type: Integer, default: 86400
+        field :expiration, type: Integer, default: 60
+        # @!attribute [rw] used
+        #   @return [Boolean] TRUE if this authorization code has already generated a token, FALSE otherwise.
+        field :used, type: Integer, default: false
 
         # @!attribute [rw] account
         #   @return [Arkaaan::Account] the account granting the authorization to access its data to the application.

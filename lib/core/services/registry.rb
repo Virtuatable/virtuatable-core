@@ -22,6 +22,9 @@ module Core
       # @!attribute [r] authorizations
       #   @return [Core::Services::Authorizations] the service managing authorizations
       attr_reader :authorizations
+      # @!attribute [r] tokens
+      #   @return [Core::Services::Tokens] the service managing OAuth access tokens
+      attr_reader :tokens
 
       def initialize
         @accounts = Core::Services::Accounts.instance
@@ -29,6 +32,7 @@ module Core
         @campaigns = Core::Services::Campaigns.instance
         @applications = Core::Services::Applications.instance
         @authorizations = Core::Services::Authorizations.instance
+        @tokens = Core::Services::Tokens.instance
       end
     end
   end
