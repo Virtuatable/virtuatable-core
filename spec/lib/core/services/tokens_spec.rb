@@ -79,7 +79,8 @@ RSpec.describe Core::Services::Tokens do
         expect(->{ service.create_from_authorization(**params) }).to raise_error Core::Helpers::Errors::Forbidden
       end
       it 'fails if the authorization code has already been used' do
-        second_auth = create(:authorization, application: application, code: 'any code', used: true)
+        second_auth = create(:authorization, application: application, code: 'any code')
+        second_token = create(:access_token, authorization: second_auth)
         params = {
           client_id: application.client_id,
           client_secret: application.client_secret,
