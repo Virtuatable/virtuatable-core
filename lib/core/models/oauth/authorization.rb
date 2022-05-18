@@ -18,9 +18,6 @@ module Core
         # @!attribute [rw] expiration
         #   @return [Integer] the time, in seconds, after which the authorization is declared expired.
         field :expiration, type: Integer, default: 60
-        # @!attribute [rw] used
-        #   @return [Boolean] TRUE if this authorization code has already generated a token, FALSE otherwise.
-        field :used, type: Integer, default: false
 
         # @!attribute [rw] account
         #   @return [Arkaaan::Account] the account granting the authorization to access its data to the application.
@@ -43,6 +40,10 @@ module Core
         # @return [Boolean] TRUE if the authorization is expired, FALSE otherwise.
         def expired?
           created_at.to_time.to_i + expiration < Time.now.to_i
+        end
+
+        def used?
+          tokens.count > 0
         end
       end
     end

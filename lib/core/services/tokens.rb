@@ -14,7 +14,7 @@ module Core
           client_secret: client_secret,
           authorization_code: authorization_code
         )
-        raise forbidden_err(field: 'authorization_code', error: 'used') if authorization.used
+        raise forbidden_err(field: 'authorization_code', error: 'used') if authorization.used?
 
         created = Core::Models::OAuth::AccessToken.create(authorization: authorization)
         Core::Decorators::Token.new(created)
