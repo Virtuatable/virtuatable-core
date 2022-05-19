@@ -4,6 +4,57 @@ RSpec.describe Core::Services::Authorizations do
   let!(:application) { create(:application, creator: account) }
   let!(:authorization) { create(:authorization, application: application) }
 
+  describe :create_from_credentials do
+    let!(:session) { create(:session, account: account) }
+
+    describe 'Nominal case' do
+      let!(:created) {
+        service.create_from_session(
+          session_id: session.token,
+          client_id: application.client_id
+        )
+      }
+      it 'Created only one authorization' do
+        expect(Core::Models::OAuth::Authorization.where(code: created.code).count).to be 1
+      end
+      it 'has the correct application linked to it' do
+        expect(created.application.id.to_s).to eq application.id.to_s
+      end
+      it 'has the correct account linked to it' do
+        expect(created.account.id.to_s).to eq account.id.to_s
+      end
+    end
+    describe 'Error cases' do
+
+      it 'Fails if the session ID is not given' do
+        params = {
+          client_id: application.client_id
+        }
+        expect(->{ service.create_from_session(**params) }).to raise_error Core::Helpers::Errors::BadRequest
+      end
+      it 'Fails if the client ID is not given' do
+        params = {
+          session_id: session.token
+        }
+        expect(->{ service.create_from_session(**params) }).to raise_error Core::Helpers::Errors::BadRequest
+      end
+      it 'Fails if the client ID does not exist' do
+        params = {
+          client_id: 'unknown',
+          session_id: session.token
+        }
+        expect(->{ service.create_from_session(**params) }).to raise_error Core::Helpers::Errors::NotFound
+      end
+      it 'Fails if the session ID does not exist' do
+        params = {
+          client_id: application.client_id,
+          session_id: 'unknown'
+        }
+        expect(->{ service.create_from_session(**params) }).to raise_error Core::Helpers::Errors::NotFound
+      end
+    end
+  end
+
   describe :get_by_credentials do
     it 'returns the auth code when everything goes well' do
       params = {

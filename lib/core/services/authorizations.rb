@@ -8,7 +8,7 @@ module Core
     class Authorizations < Core::Services::Base
       include Singleton
 
-      def create_from_session(session_id: nil, client_id: nil, **ignored)
+      def create_from_session(session_id: nil, client_id: nil, client_secret: nil, **ignored)
         session = Core.svc.sessions.get_by_id(session_id: session_id)
         application = Core.svc.applications.get_by_id(client_id: client_id)
         authorization = Core::Models::OAuth::Authorization.create(
