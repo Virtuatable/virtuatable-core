@@ -42,7 +42,7 @@ module Core
         authorization = Core::Models::OAuth::Authorization.find_by(code: authorization_code)
         raise unknown_err(field: 'authorization_code') if authorization.nil?
 
-        authorization
+        Core::Decorators::Authorization.new(authorization)
       end
 
       private

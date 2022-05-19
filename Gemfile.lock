@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    virtuatable-core (1.6.0.dev0)
+    virtuatable-core (1.6.0.dev2)
       activemodel (= 6.0.3.2)
       activesupport (= 6.0.3.2)
       bcrypt (= 3.1.13)
       dotenv (= 2.7.6)
-      draper
+      draper (= 4.0.2)
       mongoid (= 7.4.0)
       sinatra (= 2.1.0)
       sinatra-contrib (= 2.1.0)
@@ -64,7 +64,7 @@ GEM
       i18n (>= 1.6, < 2)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
-    loofah (2.17.0)
+    loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     method_source (1.0.0)
