@@ -28,6 +28,7 @@ module Core
           account: account,
           token: SecureRandom.uuid
         )
+        Decorators::Sessions.new(session)
       end
 
       # Gets the session by its unique identifier.
