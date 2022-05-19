@@ -13,7 +13,7 @@ module Core
       def api_list(items)
         halt 200, {
           count: items.count,
-          items: items.map { |item| enhanced_h(item) }
+          items: items.map { |item| item.to_h }
         }.to_json
       end
 
@@ -21,29 +21,19 @@ module Core
       # returning the informations about the created item.
       # @param item [Object] any object that responds to #to_h to display to the user.
       def api_created(item)
-        halt 201, enhanced_json(item)
+        halt 201, item.to_json
       end
 
       # Displays an item with the standards of the API.
       # @param item [Object] the item to display as a JSON formatted hash.
       def api_item(item)
-        halt 200, enhanced_json(item)
+        halt 200, item.to_json
       end
 
       # Displays a message with a 200 status code
       # @param message [String] the message to display with the API standards.
       def api_ok(message)
         api_item message: message
-      end
-
-      private
-
-      def enhanced_h(item)
-        (item.respond_to?(:enhance) ? item.enhance : item).to_h
-      end
-
-      def enhanced_json(item)
-        enhanced_h(item).to_json
       end
     end
   end
