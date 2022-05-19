@@ -8,6 +8,16 @@ module Core
     class Authorizations < Core::Services::Base
       include Singleton
 
+      def create_from_session(session_id: nil, client_id: nil, **ignored)
+        session = Core.svc.sessions.get_by_id(session_id: session_id)
+        application = Core.svc.applications.get_by_id(client_id: client_id)
+        authorization = Core::Models::OAuth::Authorization.create(
+          account: session.account,
+          application: application
+        )
+        Core::Decorators::Authorization.new(authorization)
+      end
+
       # Gets the authorization code corresponding to the provided value if it is linked to the
       # application matching the provided credentials. Otherwise it raises errors.
       #
